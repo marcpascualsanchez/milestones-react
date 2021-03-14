@@ -2,6 +2,8 @@ import "../styles.css";
 import Timeline from "./Timeline/Timeline";
 import { IMilestone } from "./Milestone/Milestone.d";
 import { ITimeline } from "./Timeline/Timeline.d";
+import CreateTimeline from "./CreateTimeline/CreateTimeline";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // TODO: load from real source
 const mockMilestones: IMilestone[] = [
@@ -53,9 +55,20 @@ const timeline: ITimeline = {
 
 export default function App() {
   return (
-    <div className="App">
-      <h1>Milestones app</h1>
-      <Timeline timeline={timeline} />
-    </div>
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/:id">
+            <div className="App">
+              <h1>Milestones app</h1>
+              <Timeline timeline={timeline} />
+            </div>
+          </Route>
+          <Route path="/">
+            <CreateTimeline />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }

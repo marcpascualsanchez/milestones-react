@@ -3,6 +3,7 @@ import "./style.css";
 import { ITimeline } from "./Timeline.d";
 import Milestone from "../Milestone/Milestone";
 import { IMilestone } from "../Milestone/Milestone.d";
+import { useParams } from "react-router-dom";
 
 interface IProps {
   timeline: ITimeline;
@@ -21,6 +22,8 @@ function getMilestonePositionStyle(
 }
 
 export default function Timeline({ timeline }: IProps) {
+  let { id } = useParams() as any;
+  console.log("TODO: fetch db by id", id);
   const initialTime = timeline.initialDate.getTime();
   const totalTimeMS =
     timeline.finalDate.getTime() - timeline.initialDate.getTime();

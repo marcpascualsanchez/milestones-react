@@ -35,7 +35,7 @@ export default function Milestone(props: IProps) {
     );
   }
 
-  let detail;
+  let detail: any = "";
   if (isHover) {
     detail = (
       <div
@@ -47,5 +47,10 @@ export default function Milestone(props: IProps) {
       </div>
     );
   }
-  return [<div className="marker-container">{marker}</div>, detail];
+  return (
+    <div>
+      <div className="marker-container">{marker}</div>
+      {detail}
+    </div>
+  );
 }

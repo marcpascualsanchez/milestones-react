@@ -15,7 +15,7 @@ export default function MilestoneDetail(props: IProps) {
     <div className="container">
       <h3>{getFormatedDate(props.milestone.date)}</h3>
       <h2>{props.milestone.title}</h2>
-      <img src={props.milestone.img}></img>
+      <img src={props.milestone.img} alt="Milestone"></img>
       <p>{props.milestone.description}</p>
     </div>
   );
