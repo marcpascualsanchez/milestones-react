@@ -1,0 +1,8 @@
+.diagram {
+  height: 1px;
+  border-top: solid black 1px;
+  position: relative;
+  margin-top: 50px;
+  margin-right: 150px;
+  margin-left: 50px;
+}

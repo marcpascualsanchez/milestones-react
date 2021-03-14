@@ -1,0 +1,18 @@
+.milestone {
+  position: absolute;
+}
+
+.milestone.marker {
+  height: 50px;
+  top: -50px;
+}
+
+.milestone.opened {
+  max-width: 40vw;
+  word-wrap: break-word;
+}
+
+.marker-container {
+  position: relative;
+  left: -25px;
+}
