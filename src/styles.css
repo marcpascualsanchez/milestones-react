@@ -1,4 +1,62 @@
-.App {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary-bg-color: #955cdb;
+  --primary-color: #edf5e1;
+  --secondary-bg-color: #5cdb95;
+  --secondary-color: #000;
+  --default-color: #000;
+  --default-alter-color: #fff;
+}
+
+button,
+input.custom-button {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid var(--primary-color);
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: var(--primary-color);
+  text-align: center;
+  transition: all 0.2s;
+  background-color: var(--primary-bg-color);
+}
+
+button:hover,
+input.custom-button:hover {
+  color: var(--default-color);
+  background-color: var(--secondary-bg-color);
+}
+
+button.secondary {
+  border: 0.1em solid var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: var(--secondary-bg-color);
+}
+
+button.secondary:hover {
+  color: var(--default-alter-color);
+  background-color: var(--primary-bg-color);
+}
+
+button.call-to-action {
+  padding: 1em 1.2em;
+}
+
+@media all and (max-width: 30em) {
+   button {
+    display: block;
+    margin: 0.4em auto;
+  }
 }

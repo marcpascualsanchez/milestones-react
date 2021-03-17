@@ -1,0 +1,33 @@
+.LandingPage {
+  margin-top: 7vh;
+}
+
+.LandingPage > p {
+  margin: 5vh 0;
+  text-align: center;
+}
+
+.LandingPage > p:nth-child(2) {
+  font-weight: bold;
+}
+
+.LandingPage > .action-container {
+  display: flex;
+}
+
+.LandingPage > .action-container > button {
+  flex: 1;
+  max-width: 30vw;
+  margin: auto;
+  font-size: 3vw;
+}
+
+@media screen and (min-width: 1000px) {
+  .LandingPage > .action-container > button {
+    font-size: 30px;
+  }
+}
+
+.LandingPage > .demo-container {
+  margin-top: 13vh;
+}

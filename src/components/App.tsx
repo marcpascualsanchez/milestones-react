@@ -1,73 +1,31 @@
 import "../styles.css";
 import Timeline from "./Timeline/Timeline";
-import { IMilestone } from "./Milestone/Milestone.d";
-import { ITimeline } from "./Timeline/Timeline.d";
-import CreateTimeline from "./CreateTimeline/CreateTimeline";
+import Header from "./Header/Header";
+import LandingPage from "./LandingPage/LandingPage";
+import CreateTimelinePage from "./CreateTimelinePage/CreateTimelinePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-// TODO: load from real source
-const mockMilestones: IMilestone[] = [
-  {
-    date: new Date("2020-03-14T17:47:55.557Z"),
-    title: "The first milestone title",
-    img: "https://picsum.photos/300/200",
-    description: "This is a nice description of the milestone",
-    isFav: true
-  },
-  {
-    date: new Date("2020-09-12T17:47:55.557Z"),
-    title: "The intermediate milestone fav",
-    img: "https://picsum.photos/300/200",
-    description: "This is a nice description of the milestone",
-    isFav: true
-  },
-  {
-    date: new Date("2020-10-11T17:47:55.557Z"),
-    title: "The intermediate milestone not fav",
-    img: "https://picsum.photos/300/200",
-    description: "This is a nice description of the milestone",
-    isFav: false
-  },
-  {
-    date: new Date("2021-06-01T17:47:55.557Z"),
-    title: "The last milestone title",
-    img: "https://picsum.photos/300/200",
-    description: "This is a nice description of the milestone",
-    isFav: true
-  }
-];
-let initialDate: Date = mockMilestones[0].date;
-let finalDate: Date = mockMilestones[0].date;
-mockMilestones.forEach((m) => {
-  const timestamp = m.date.getTime();
-  if (timestamp > finalDate.getTime()) {
-    finalDate = m.date;
-  }
-  if (timestamp < initialDate.getTime()) {
-    initialDate = m.date;
-  }
-});
-const timeline: ITimeline = {
-  milestones: mockMilestones,
-  initialDate,
-  finalDate
-};
 
 export default function App() {
   return (
     <Router>
       <div>
+        <Header isLoggedIn={false} />
         <Switch>
+          <Route path="/new">
+            <CreateTimelinePage />
+          </Route>
           <Route path="/:id">
-            <div className="App">
-              <h1>Milestones app</h1>
-              <Timeline timeline={timeline} />
-            </div>
+            <Timeline />
           </Route>
           <Route path="/">
-            <CreateTimeline />
+            <LandingPage />
           </Route>
         </Switch>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+          rel="stylesheet"
+        />
       </div>
     </Router>
   );
