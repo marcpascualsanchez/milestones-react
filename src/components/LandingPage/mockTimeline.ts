@@ -1,7 +1,7 @@
 import { IMilestone } from "../Milestone/Milestone.d";
 import { ITimeline } from "../Timeline/Timeline.d";
 
-const mockMilestones: IMilestone[] = [
+export const mockMilestones: IMilestone[] = [
   {
     date: new Date("2020-03-14T17:47:55.557Z"),
     title: "The first time we met",

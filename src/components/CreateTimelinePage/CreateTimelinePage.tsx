@@ -3,9 +3,8 @@ import { useState } from "react";
 import "../../styles.css";
 import "./style.css";
 import Timeline from "../Timeline/Timeline";
-import { ITimeline } from "../Timeline/Timeline.d";
 import { IMilestone } from "../Milestone/Milestone.d";
-import { getUpdatedArray } from "../../utils";
+import { getDateInputValue, getUpdatedArray } from "../../utils";
 
 const rightNow = new Date();
 
@@ -18,52 +17,46 @@ const defaultMilestone: IMilestone = {
   isHighlighted: true
 };
 
-const defaultTimeline: ITimeline = {
-  initialDate: rightNow,
-  finalDate: rightNow,
-  milestones: [defaultMilestone]
-};
-
 export default function CreateTimelinePage() {
-  const [timeline, setTimeline] = useState(defaultTimeline);
+  const [milestones, setMilestones] = useState([{ ...defaultMilestone }]);
   const [milestoneIndex, setMilestoneIndex] = useState(0);
+  let dateInputElement: HTMLFormElement | undefined;
 
-  const handleSubmit = (event: any, newMilestone: IMilestone) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
-    let { initialDate, finalDate, milestones } = timeline;
-    if (newMilestone.date.getTime() < timeline.initialDate.getTime()) {
-      initialDate = newMilestone.date;
-    }
-    if (newMilestone.date.getTime() > timeline.finalDate.getTime()) {
-      finalDate = newMilestone.date;
-    }
-    setTimeline({
-      initialDate,
-      finalDate,
-      milestones: milestones.concat(defaultMilestone)
-    });
+    setMilestones(milestones.concat(defaultMilestone));
     setMilestoneIndex(milestoneIndex + 1);
+    if (dateInputElement) {
+      dateInputElement.reset();
+    }
   };
 
   const updateMilestone = (propertyObj: any) => {
     const updatedMilestones: IMilestone[] = getUpdatedArray<IMilestone>(
-      timeline.milestones,
+      milestones,
       milestoneIndex,
       propertyObj
     );
-    setTimeline({ ...timeline, milestones: updatedMilestones });
+    setMilestones(updatedMilestones);
   };
 
   return (
     <div className="create-timeline-page">
-      <Timeline timeline={timeline} />
+      <Timeline milestones={milestones} />
+      {milestones.length > 2 && (
+        <div className="save-container">
+          <button className="call-to-action">Save</button>
+        </div>
+      )}
       <form
-        onSubmit={(e) => handleSubmit(e, timeline.milestones[milestoneIndex])}
+        onSubmit={(e) => handleSubmit(e)}
+        ref={(el) => (dateInputElement = el ? el : undefined)}
       >
         <label>
           Title
           <input
             type="text"
+            value={milestones[milestoneIndex].title}
             required
             onChange={(e) => updateMilestone({ title: e.target.value })}
           />
@@ -71,6 +64,7 @@ export default function CreateTimelinePage() {
         <label>
           Description
           <textarea
+            value={milestones[milestoneIndex].description}
             onChange={(e) => updateMilestone({ description: e.target.value })}
           />
         </label>
@@ -78,7 +72,8 @@ export default function CreateTimelinePage() {
           Image link
           <input
             type="text"
-            onChange={(e) => updateMilestone({ image: e.target.value })}
+            value={milestones[milestoneIndex].img}
+            onChange={(e) => updateMilestone({ img: e.target.value })}
           />
         </label>
         <label>
@@ -87,12 +82,13 @@ export default function CreateTimelinePage() {
             required
             type="date"
             onChange={(e) =>
-              updateMilestone({ date: new Date(e.target.value) })
+              updateMilestone({ date: getDateInputValue(e.target.value) })
             }
           />
         </label>
-        <input type="submit" value="Add" className="custom-button" />
-        {/* <button disabled={milestone}>Save</button> */}
+        <div className="add-container">
+          <input type="submit" value="Add" className="custom-button" />
+        </div>
       </form>
     </div>
   );

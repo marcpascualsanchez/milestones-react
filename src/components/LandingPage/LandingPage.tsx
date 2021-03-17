@@ -1,7 +1,7 @@
 import "../../styles.css";
 import "./style.css";
 import Timeline from "../Timeline/Timeline";
-import { mockTimeline } from "./mockTimeline";
+import { mockMilestones } from "./mockTimeline";
 
 export default function LandingPage() {
   return (
@@ -19,7 +19,7 @@ export default function LandingPage() {
       </div>
       <p>Or check out this demo!</p>
       <div className="demo-container">
-        <Timeline timeline={mockTimeline} />
+        <Timeline milestones={mockMilestones} />
       </div>
     </div>
   );

@@ -9,3 +9,10 @@ export function getUpdatedArray<T>(
     ...originalArray.slice(index + 1)
   ];
 }
+
+export function getDateInputValue(inputValue: string): Date {
+  // inputValue is like YYYY-MM-DD
+  // const [year, , month] = inputValue.split("-");
+  const date = new Date(inputValue);
+  return date;
+}

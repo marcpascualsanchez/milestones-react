@@ -1,13 +1,12 @@
 import "../../styles.css";
 import "./style.css";
-import { ITimeline } from "./Timeline.d";
 import Milestone from "../Milestone/Milestone";
 import { IMilestone } from "../Milestone/Milestone.d";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 interface IProps {
-  timeline?: ITimeline;
+  milestones?: IMilestone[];
 }
 
 function getMilestonePositionStyle(
@@ -22,30 +21,49 @@ function getMilestonePositionStyle(
   };
 }
 
-export default function Timeline(props: IProps) {
-  let { timeline } = props;
-  const [isLoading, setIsLoading] = useState(timeline === undefined);
-  let { id } = useParams() as any;
-  if (!timeline) {
-    timeline = {
-      milestones: [],
-      initialDate: new Date(),
-      finalDate: new Date()
-    }; // TODO: get timeline by id from DB -> setIsLoading(false)
-  }
+const rightNow = new Date();
 
-  if (isLoading) {
+export default function Timeline(props: IProps) {
+  const milestones = props.milestones || null;
+  const [intervalDates, setIntervalDates] = useState({
+    initialDate: milestones ? milestones[0].date : rightNow,
+    finalDate: milestones ? milestones[0].date : rightNow
+  });
+  // let { id } = useParams() as any;
+  if (!milestones) {
+    // TODO: get timeline by id from DB -> setMilestones()
     return <div className="loading"></div>;
   }
 
-  const initialTime = timeline.initialDate.getTime();
+  if (milestones.length) {
+    let newInitialDate = milestones[0].date;
+    let newFinalDate = milestones[0].date;
+    milestones.forEach((m) => {
+      if (m.date.getTime() < newInitialDate.getTime()) {
+        newInitialDate = m.date;
+      }
+      if (m.date.getTime() > newFinalDate.getTime()) {
+        newFinalDate = m.date;
+      }
+    });
+    if (
+      newInitialDate.getTime() !== intervalDates.initialDate.getTime() ||
+      newFinalDate.getTime() !== intervalDates.finalDate.getTime()
+    ) {
+      setIntervalDates({
+        initialDate: newInitialDate,
+        finalDate: newFinalDate
+      });
+    }
+  }
+  const initialTime = intervalDates.initialDate.getTime();
   const totalTimeMS =
-    timeline.finalDate.getTime() - timeline.initialDate.getTime();
+    intervalDates.finalDate.getTime() - intervalDates.initialDate.getTime();
 
   return (
     <div className="Timeline">
       <div className="diagram">
-        {timeline.milestones.map((m) => (
+        {milestones.map((m) => (
           <Milestone
             milestone={m}
             style={getMilestonePositionStyle(initialTime, totalTimeMS, m)}

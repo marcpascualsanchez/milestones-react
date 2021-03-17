@@ -1,4 +1,42 @@
-label {
-  margin-bottom: 15px;
+form {
+  padding-top: 35vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  margin: auto;
+}
+
+form > label {
+  margin-bottom: 25px;
   display: block;
+  font-weight: bold;
+}
+
+label > input,
+label > textarea {
+  display: block;
+  margin-left: 5vw;
+  width: 60vw;
+  max-width: 600px;
+}
+
+.add-container {
+  margin-left: 5vw;
+  width: 60vw;
+  max-width: 600px;
+  display: flex;
+}
+
+.add-container > input {
+  max-width: 30vw;
+  margin: auto;
+}
+
+.save-container {
+  margin-top: 15px;
+  display: flex;
+}
+
+.save-container > button {
+  margin: auto;
 }
