@@ -13,10 +13,12 @@ function getFormatedDate(date: Date) {
 export default function MilestoneDetail(props: IProps) {
   return (
     <div className="container">
-      <h3>{getFormatedDate(props.milestone.date)}</h3>
-      <h2>{props.milestone.title}</h2>
-      <img src={props.milestone.img} alt="Milestone"></img>
-      <p>{props.milestone.description}</p>
+      {props.milestone.date && <h3>{getFormatedDate(props.milestone.date)}</h3>}
+      {props.milestone.title && <h2>{props.milestone.title}</h2>}
+      {props.milestone.img && (
+        <img src={props.milestone.img} alt="Milestone"></img>
+      )}
+      {props.milestone.description && <p>{props.milestone.description}</p>}
     </div>
   );
 }

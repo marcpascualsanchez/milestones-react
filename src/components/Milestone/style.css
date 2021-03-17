@@ -5,10 +5,21 @@
 .milestone.marker {
   height: 50px;
   top: -50px;
+  transform: scale(1);
+  transition-duration: 0.5s;
+}
+
+.milestone.marker:hover {
+  transform: scale(1.5);
+  transition-duration: 0.5s;
+}
+
+.milestone.highlight {
+  background-color: red;
 }
 
 .milestone.opened {
-  max-width: 40vw;
+  max-width: 60vw;
   word-wrap: break-word;
 }
 

@@ -4,4 +4,5 @@ export interface IMilestone {
   title: string;
   img?: any; // ???
   isFav?: boolean;
+  isHighlighted?: boolean;
 }

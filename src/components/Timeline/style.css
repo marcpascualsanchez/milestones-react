@@ -3,6 +3,34 @@
   border-top: solid black 1px;
   position: relative;
   margin-top: 50px;
-  margin-right: 150px;
+  margin-right: 50px;
   margin-left: 50px;
+}
+
+/* From https://loading.io/css/ */
+.loading {
+  margin: auto;
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+.loading:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid var(--primary-bg-color);
+  border-color: var(--primary-bg-color) transparent var(--primary-bg-color)
+    transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -19,7 +19,9 @@ export default function Milestone(props: IProps) {
     marker = (
       <FavMarker
         style={props.style}
-        className="marker milestone"
+        className={`marker milestone ${
+          props.milestone.isHighlighted ? "highlight" : ""
+        }`}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       />
