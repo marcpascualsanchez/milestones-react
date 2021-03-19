@@ -24,7 +24,7 @@ function getMilestonePositionStyle(
 const rightNow = new Date();
 
 export default function Timeline(props: IProps) {
-  let { id } = useParams() as any;
+  let { id } = useParams<any>();
   let milestones = props.milestones || null;
   const [isLoading, setIsLoading] = useState(false);
   const [intervalDates, setIntervalDates] = useState({
