@@ -43,9 +43,8 @@ export default function CreateTimelinePage() {
 
   const save = async () => {
     const body = JSON.stringify({
-      milestones
+      milestones: milestones.slice(0, -1)
     });
-    console.log("sent body", body);
     const options = {
       body,
       headers: { "Content-Type": "application/json" },
