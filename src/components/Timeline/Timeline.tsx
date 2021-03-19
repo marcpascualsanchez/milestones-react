@@ -35,18 +35,18 @@ export default function Timeline(props: IProps) {
     // TODO: get timeline by id from DB -> setMilestones()
     if (!isLoading) {
       setIsLoading(true);
+      const options = {
+        headers: { "Content-Type": "application/json" },
+        method: "GET"
+      };
+      fetch(`/milestones/${id}`, options).then(async (answer) => {
+        const response = await answer.json();
+        if (response && response.milestones) {
+          milestones = response.milestones;
+        }
+        setIsLoading(false);
+      });
     }
-    const options = {
-      headers: { "Content-Type": "application/json" },
-      method: "GET"
-    };
-    fetch(`/milestones/${id}`, options).then(async (answer) => {
-      const response = await answer.json();
-      if (response && response.milestones) {
-        milestones = response.milestones;
-      }
-      setIsLoading(false);
-    });
     return <div className="loading"></div>;
   }
   if (isLoading) {
