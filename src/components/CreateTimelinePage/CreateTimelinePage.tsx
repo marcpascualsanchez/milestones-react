@@ -5,6 +5,7 @@ import "./style.css";
 import Timeline from "../Timeline/Timeline";
 import { IMilestone } from "../Milestone/Milestone.d";
 import { getDateInputValue, getUpdatedArray } from "../../utils";
+import { ITimeline } from "../Timeline/Timeline.d";
 
 const rightNow = new Date();
 
@@ -40,12 +41,23 @@ export default function CreateTimelinePage() {
     setMilestones(updatedMilestones);
   };
 
+  const save = async () => {
+    const body = JSON.stringify({
+      milestones
+    });
+    const answer = await fetch("/milestones", { body, method: "POST" });
+    const timeline: ITimeline = await answer.json();
+    if (timeline && timeline._id) window.location.href = `/${timeline._id}`;
+  };
+
   return (
     <div className="create-timeline-page">
       <Timeline milestones={milestones} />
       {milestones.length > 2 && (
         <div className="save-container">
-          <button className="call-to-action">Save</button>
+          <button className="call-to-action" onClick={() => save()}>
+            Save
+          </button>
         </div>
       )}
       <form

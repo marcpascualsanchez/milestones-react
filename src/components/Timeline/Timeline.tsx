@@ -24,7 +24,7 @@ function getMilestonePositionStyle(
 const rightNow = new Date();
 
 export default function Timeline(props: IProps) {
-  const milestones = props.milestones || null;
+  const [milestones, setMilestones] = useState(props.milestones || null);
   const [intervalDates, setIntervalDates] = useState({
     initialDate: milestones ? milestones[0].date : rightNow,
     finalDate: milestones ? milestones[0].date : rightNow
@@ -32,6 +32,10 @@ export default function Timeline(props: IProps) {
   // let { id } = useParams() as any;
   if (!milestones) {
     // TODO: get timeline by id from DB -> setMilestones()
+    fetch("/milestones", { method: "GET" }).then(async (answer) => {
+      const response = await answer.json();
+      setMilestones(response.milestones);
+    });
     return <div className="loading"></div>;
   }
 

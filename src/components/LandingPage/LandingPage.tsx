@@ -12,7 +12,7 @@ export default function LandingPage() {
         <button className="secondary call-to-action">See random</button>
         <button
           className="secondary call-to-action"
-          onClick={() => (window.location.href = "/new")}
+          onClick={() => (window.location.href = "/#/new")}
         >
           Create one
         </button>
