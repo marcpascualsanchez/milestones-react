@@ -46,7 +46,12 @@ export default function CreateTimelinePage() {
       milestones
     });
     console.log("sent body", body);
-    const answer = await fetch("/milestones", { body, method: "POST" });
+    const options = {
+      body,
+      headers: { "Content-Type": "application/json" },
+      method: "POST"
+    };
+    const answer = await fetch("/milestones", options);
     const timeline: ITimeline = await answer.json();
     if (timeline && timeline._id) window.location.href = `/${timeline._id}`;
   };

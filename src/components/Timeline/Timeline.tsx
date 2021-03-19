@@ -36,7 +36,11 @@ export default function Timeline(props: IProps) {
     if (!isLoading) {
       setIsLoading(true);
     }
-    fetch(`/milestones/${id}`, { method: "GET" }).then(async (answer) => {
+    const options = {
+      headers: { "Content-Type": "application/json" },
+      method: "GET"
+    };
+    fetch(`/milestones/${id}`, options).then(async (answer) => {
       const response = await answer.json();
       if (response && response.milestones) {
         milestones = response.milestones;
