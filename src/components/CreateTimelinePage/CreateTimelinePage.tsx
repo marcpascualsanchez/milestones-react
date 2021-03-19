@@ -52,7 +52,7 @@ export default function CreateTimelinePage() {
     };
     const answer = await fetch("/milestones", options);
     const timeline: ITimeline = await answer.json();
-    if (timeline && timeline._id) window.location.href = `/${timeline._id}`;
+    if (timeline && timeline._id) window.location.href = `/#/${timeline._id}`;
   };
 
   return (
