@@ -2,7 +2,7 @@ import "../../styles.css";
 import "./style.css";
 import Milestone from "../Milestone/Milestone";
 import { IMilestone } from "../Milestone/Milestone.d";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 interface IProps {
@@ -24,19 +24,23 @@ function getMilestonePositionStyle(
 const rightNow = new Date();
 
 export default function Timeline(props: IProps) {
+  let { id } = useParams() as any;
   let milestones = props.milestones || null;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [intervalDates, setIntervalDates] = useState({
     initialDate: milestones ? milestones[0].date : rightNow,
     finalDate: milestones ? milestones[0].date : rightNow
   });
-  // let { id } = useParams() as any;
   if (!milestones) {
     // TODO: get timeline by id from DB -> setMilestones()
-    setIsLoading(true);
-    fetch("/milestones", { method: "GET" }).then(async (answer) => {
+    if (!isLoading) {
+      setIsLoading(true);
+    }
+    fetch(`/milestones/${id}`, { method: "GET" }).then(async (answer) => {
       const response = await answer.json();
-      milestones = response.milestones;
+      if (response && response.milestones) {
+        milestones = response.milestones;
+      }
       setIsLoading(false);
     });
     return <div className="loading"></div>;
