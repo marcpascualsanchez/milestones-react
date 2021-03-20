@@ -25,30 +25,36 @@ const rightNow = new Date();
 
 export default function Timeline(props: IProps) {
   let { id } = useParams<any>();
-  let milestones = props.milestones || null;
-  const [isLoading, setIsLoading] = useState(false);
+  const [milestones, setMilestones] = useState(props.milestones || null);
   const [intervalDates, setIntervalDates] = useState({
     initialDate: milestones ? milestones[0].date : rightNow,
     finalDate: milestones ? milestones[0].date : rightNow
   });
+  let isLoading = false;
   if (!milestones) {
     // TODO: get timeline by id from DB -> setMilestones()
     if (!isLoading) {
-      setIsLoading(true);
+      isLoading = true;
       const options = {
         headers: { "Content-Type": "application/json" },
         method: "GET"
       };
+      console.log("fetching");
       fetch(`/milestones/${id}`, options).then(async (answer) => {
         const response = await answer.json();
+        console.log("response", response);
         if (response && response.milestones) {
-          milestones = response.milestones;
+          response.milestones.forEach(
+            (m: IMilestone) => (m.date = new Date(m.date))
+          );
+          setMilestones(response.milestones);
         }
-        setIsLoading(false);
+        isLoading = false;
       });
     }
     return <div className="loading"></div>;
   }
+
   if (isLoading) {
     return <div className="loading"></div>;
   }
