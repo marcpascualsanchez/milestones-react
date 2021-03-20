@@ -9,7 +9,10 @@ interface IProps {
 export default function Header(props: IProps) {
   return (
     <header className="Header">
-      <img src={Logo} alt="logo" onClick={() => (window.location.href = "/")} />
+      <div onClick={() => (window.location.href = "/")}>
+        <img src={Logo} alt="logo" />
+        <span>Squad Memories</span>
+      </div>
 
       <div className="action-container">
         {props.isLoggedIn ? (

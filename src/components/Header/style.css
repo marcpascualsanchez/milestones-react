@@ -7,11 +7,15 @@ header.Header {
   height: 6vh;
 }
 
-.Header > img {
+.Header > div {
   float: left;
   display: block;
   height: 5vh;
   cursor: pointer;
+}
+
+.Header > div > img {
+  height: 5vh;
 }
 
 .Header > .action-container {

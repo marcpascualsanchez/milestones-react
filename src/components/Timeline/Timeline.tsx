@@ -3,7 +3,7 @@ import "./style.css";
 import Milestone from "../Milestone/Milestone";
 import { IMilestone } from "../Milestone/Milestone.d";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
   milestones?: IMilestone[];
@@ -30,6 +30,11 @@ export default function Timeline(props: IProps) {
     initialDate: milestones ? milestones[0].date : rightNow,
     finalDate: milestones ? milestones[0].date : rightNow
   });
+  useEffect(() => {
+    if (props.milestones) {
+      setMilestones(props.milestones);
+    }
+  }, [props.milestones]);
   let isLoading = false;
   if (!milestones) {
     // TODO: get timeline by id from DB -> setMilestones()
