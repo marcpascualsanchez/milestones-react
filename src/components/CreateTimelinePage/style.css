@@ -40,3 +40,7 @@ label > textarea {
 .save-container > button {
   margin: auto;
 }
+
+.sub-label {
+  font-size: 11px;
+}

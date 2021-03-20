@@ -86,7 +86,10 @@ export default function CreateTimelinePage() {
           />
         </label>
         <label>
-          Image link
+          Image link{" "}
+          <span className="sub-label">
+            (example: https://i.imgur.com/nwhnRsZ.jpg)
+          </span>
           <input
             type="text"
             value={milestones[milestoneIndex].img}
