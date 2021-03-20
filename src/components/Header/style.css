@@ -12,6 +12,7 @@ header.Header {
   display: block;
   height: 5vh;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .Header > div > img {
