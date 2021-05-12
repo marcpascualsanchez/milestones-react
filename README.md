@@ -1,6 +1,6 @@
 # Memories
 
-Have you ever wanted to create & share your squad stories? Now you can.
+Have you ever wanted to create & share your squad stories? [Now you can](https://squad-memories.herokuapp.com/).
 
 ## To the dev reading this
 
